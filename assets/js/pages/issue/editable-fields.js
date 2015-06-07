@@ -40,6 +40,40 @@ var EditableFields = {
             emptytext: 'Click here to add URL'
         });
 
+        $('#external_cms_id').editable({
+            url: '/issues/update_editable_field',
+            type: 'textarea',
+            pk: issueId,
+            name: 'external_cms_id',
+            ajaxOptions: {
+                type: 'POST'
+            },
+            emptytext: 'Click here to add ID'
+        });
+
+        $('#external_cms_url').editable({
+            url: '/issues/update_editable_field',
+            type: 'textarea',
+            pk: issueId,
+            name: 'external_cms_url',
+            ajaxOptions: {
+                type: 'POST'
+            },
+            emptytext: 'Click here to add URL'
+        });
+
+        $('#pms_id').editable({
+            url: '/issues/update_editable_field',
+            type: 'select',
+            pk: issueId,
+            name: 'pms_id',
+            ajaxOptions: {
+                type: 'POST'
+            },
+            source: '/issues/type_pms/' + issueId,
+            sourceCache: true
+        });
+
         $('#priority_id').editable({
             url: '/issues/update_editable_field',
             type: 'select',

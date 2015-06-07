@@ -1,0 +1,2 @@
+ALTER TABLE `issues` ADD `external_cms_id` VARCHAR(20) NULL DEFAULT NULL;
+ALTER TABLE `issues` ADD `external_cms_url` VARCHAR(500) NULL DEFAULT NULL;

@@ -11,11 +11,14 @@ class Model_Issue extends Model_Abstract {
         'type_id' => NULL,
         'project_id' => NULL,
         'priority_id' => NULL,
+        'pms_id' => NULL,
         'reporter_user_id' => NULL,
         'assigned_department_id' => NULL,
         'summary' => NULL,
         'description' => NULL,
         'example_url' => NULL,
+        'external_cms_url' => NULL,
+        'external_cms_id' => NULL,
         'due_date' => NULL,
         'due_time' => NULL,
         'last_updated_by_user_id' => NULL,
@@ -44,6 +47,7 @@ class Model_Issue extends Model_Abstract {
         'type' => array('model' => 'Issue_Type', 'foreign_key' => 'type_id'),
         'status' => array('model' => 'Issue_Status', 'foreign_key' => 'status_id'),
         'assigned_department' => array('model' => 'Department', 'foreign_key' => 'assigned_department_id'),
+        'pms' => array('model' => 'Pms', 'foreign_key' => 'pms_id'),
         'last_updated_by' => array('model' => 'User', 'foreign_key' => 'last_updated_by_user_id'),
         'duplicate' => array('model' => 'Issue', 'foreign_key' => 'duplicate_id'),
     );
@@ -70,9 +74,14 @@ class Model_Issue extends Model_Abstract {
 
     private function _beforeSave(Validation $validation = NULL)
     {
-        // Prepend http:// to example URLs
-        if ( ! empty($this->_object['example_url']) && strpos($this->_object['example_url'], 'http://') === FALSE) {
+        $re = "/^(?:f|ht)tps?:\\/\\//i";
+      // Prepend http:// to example URLs
+        if ( ! empty($this->_object['example_url']) && !preg_match($re, $this->_object['example_url'])) {
             $this->_object['example_url'] = 'http://' . $this->_object['example_url'];
+        }
+            // Prepend http:// to external cms URLs
+        if ( ! empty($this->_object['external_cms_url']) && !preg_match($re, $this->_object['external_cms_url']) ) {
+            $this->_object['external_cms_url'] = 'htdptp://' . $this->_object['external_cms_url'];
         }
     }
 

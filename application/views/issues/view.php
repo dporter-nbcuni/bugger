@@ -21,6 +21,51 @@
                 <div class="col-xs-12"><span id="example_url"><?php echo $issue->example_url; ?></span></div>
             </div>
 
+
+            <h4 class="page-header"></h4>
+
+            <div class="box box-info box box-default">
+              <div class="box-header with-border">
+                <h3 class="box-title">External CMS</h3>
+                <div class="box-tools pull-right">
+                  <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div>
+              </div><!-- /.box-header -->
+              <div class="box-body ">
+                <div class="table-responsive">
+                  <table class="table no-margin">
+                    <thead>
+                    <tr>
+                      <th>CMS</th>
+                      <th>ID</th>
+                      <th>URL</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>
+                        <a target="_blank" href="<?php echo $issue->external_cms_url; ?>"><?php echo empty($issue->external_cms_url) ? '' : '<i class="fa fa-link"></i>'; ?></a>
+                        <?php foreach(ORM::factory('Pms')->find_all() as $pms): ?>
+                          <?php if ($issue->pms_id == $pms->id): ?>
+                            <span id="pms_id"><?php echo $pms->name; ?></span>
+                            <?php break; ?>
+                          <?php endif; ?>
+                        <?php endforeach; ?>
+                      </td>
+                      <td><span id="external_cms_id"><?php echo Text::limit_chars($issue->external_cms_id, 20); ?></span></td>
+                      <td>
+                        <div class="row">
+                        <div class="col-xs-8"><span id="external_cms_url"><?php echo Text::limit_chars($issue->external_cms_url, 500); ?></span></div>
+                      </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+
             <?php include Kohana::find_file('views', 'issues/_view_attachments'); ?>
 
             <?php include Kohana::find_file('views', 'issues/_view_comments'); ?>

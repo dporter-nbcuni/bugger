@@ -8,6 +8,7 @@ class Model_Issue_Status extends Model_Abstract {
     const RESOLVED          = 5;
     const CLOSED            = 6;
     const ON_HOLD           = 7;
+    const SUBMITTED         = 8;
 
     protected $_table_name = 'issue_statuses';
 

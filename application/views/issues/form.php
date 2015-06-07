@@ -75,6 +75,8 @@
                             </div>
                         </div>
 
+
+
                         <div class="form-group">
                             <label class="col-md-2 control-label">Due Date / Time</label>
                             <div class="col-md-2">
@@ -142,6 +144,28 @@
                                 <div class="dropzone">
                                     <div class="dz-message text-muted" data-dz-message><h3 class="text-center">Click or drop files to upload.</h3></div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div id="external_cms" class="form-group">
+                            <label class="col-sm-2 control-label">External CMS</label>
+                            <div class="col-sm-3">
+                                <select id="pms_id" name="issue[pms_id]" class="form-control">
+                                  <option value="">&mdash; Choose External CMS &mdash;</option>
+                                  <?php foreach(ORM::factory('Pms')->find_all() as $pms): ?>
+                                    <option value="<?php echo $pms->id; ?>" <?php echo ($issue->pms_id == $pms->id ? 'selected' : ''); ?>><?php echo $pms->name; ?></option>
+                                  <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" maxlength="20" name="issue[external_cms_id]" placeholder="External CMS ID" class="form-control" value="<?php echo $issue->external_cms_id; ?>">
+                            </div>
+                        </div>
+
+                        <div id="external_cms" class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-7">
+                                <input type="text" maxlength="500" name="issue[external_cms_url]" placeholder="External CMS URL" class="form-control" value="<?php echo $issue->external_cms_url; ?>">
                             </div>
                         </div>
 

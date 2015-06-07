@@ -227,6 +227,24 @@ class Controller_Issues extends Controller_Auth_User {
     }
 
     /**
+     * Returns the options for the issue type dropdown in the issue page.
+     *
+     * @uses    ajax
+     * @return  json
+     */
+    public function action_type_pms()
+    {
+        $json = array();
+        $records = ORM::factory('Pms')->find_all();
+
+        foreach($records as $record) {
+            $json[$record->id] = $record->name;
+        }
+
+        $this->response->json($json);
+    }
+
+    /**
      * Returns the options for the issue priority dropdown in the issue page.
      *
      * @uses    ajax

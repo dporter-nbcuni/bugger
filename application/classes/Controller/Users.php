@@ -59,6 +59,10 @@ class Controller_Users extends Controller_Auth_Admin {
                 $post['user']['name'] = ucwords(strtolower($post['user']['name']));
                 $post['user']['email'] = strtolower($post['user']['email']);
 
+                if( empty($post['user']['username'])) {
+                  $post['user']['username'] = strtolower($post['user']['email']);
+                }
+
                 // Create user
                 $user->values($post['user'])->save();
 
