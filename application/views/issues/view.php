@@ -12,7 +12,7 @@
             <h4 class="page-header">Description</h4>
 
             <div class="row">
-                <div class="col-xs-12"><span id="description"><?php echo $issue->description; ?></span></div>
+                <div class="col-xs-12"><span id="description" data-type="wysihtml5" data-pk="1"><?php echo $issue->description; ?></span></div>
             </div>
 
             <h4 class="page-header">Example URL <a target="_blank" href="<?php echo $issue->example_url; ?>"><?php echo empty($issue->example_url) ? '' : '<i class="fa fa-link"></i>'; ?></a></h4>
@@ -44,6 +44,7 @@
                     <tbody>
                     <tr>
                       <td>
+                        <?php if (!empty($issue->pms_id)): ?>
                         <a target="_blank" href="<?php echo $issue->external_cms_url; ?>"><?php echo empty($issue->external_cms_url) ? '' : '<i class="fa fa-link"></i>'; ?></a>
                         <?php foreach(ORM::factory('Pms')->find_all() as $pms): ?>
                           <?php if ($issue->pms_id == $pms->id): ?>
@@ -51,6 +52,9 @@
                             <?php break; ?>
                           <?php endif; ?>
                         <?php endforeach; ?>
+                        <?php else: ?>
+                          <span id="pms_id"></span>
+                        <?php endif; ?>
                       </td>
                       <td><span id="external_cms_id"><?php echo Text::limit_chars($issue->external_cms_id, 20); ?></span></td>
                       <td>
